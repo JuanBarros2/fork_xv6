@@ -104,7 +104,7 @@ extern int sys_wait(void);
 extern int sys_write(void);
 extern int sys_uptime(void);
 //TODO PERGUNTAR PARA Q SERVE
-extern int sys_getpriority(int pid);
+extern int sys_getpriority(void);
 
 static int (*syscalls[])(void) = {
 [SYS_fork]    sys_fork,
@@ -128,7 +128,7 @@ static int (*syscalls[])(void) = {
 [SYS_link]    sys_link,
 [SYS_mkdir]   sys_mkdir,
 [SYS_close]   sys_close,
-[SYS_getpriority] sys_getpriority
+[SYS_getpriority] sys_getpriority,
 };
 
 void
@@ -137,10 +137,35 @@ syscall(void)
   int num;
   struct proc *curproc = myproc();
 
+  char syscalls_names[22][20] = {
+    "fork",
+    "exit",
+    "wait",
+    "pipe",
+    "read",
+    "kill",
+    "exec",
+    "fstat",
+    "chdir",
+    "dup",
+    "getpid",
+    "sbrk",
+    "sleep",
+    "uptime",
+    "open",
+    "write",
+    "mknod",
+    "unlink",
+    "link",
+    "mkdir",
+    "close",
+    "getpriority",
+  };
+
   num = curproc->tf->eax;
   if(num > 0 && num < NELEM(syscalls) && syscalls[num]) {
     curproc->tf->eax = syscalls[num]();
-    cprintf("%s: known sys call! %d\n", curproc->name, num);
+    cprintf("%s: known sys call! %d\n", syscalls_names[num-1], curproc->tf->eax);
   } else {
     cprintf("%d %s: unknown sys call %d\n",
             curproc->pid, curproc->name, num);

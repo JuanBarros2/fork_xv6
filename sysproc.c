@@ -37,6 +37,13 @@ sys_kill(void)
 }
 
 int
+sys_getpriority(void)
+{
+  cprintf("alo");
+  return 1000;
+}
+
+int
 sys_getpid(void)
 {
   return myproc()->pid;
