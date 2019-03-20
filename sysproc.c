@@ -39,13 +39,27 @@ sys_kill(void)
 int
 sys_getpriority(void)
 {
-  cprintf("alo");
-  return 1000;
+  return myproc()->priority;
 }
 
 int sys_setpriority(void){
-  cprintf("F");
-  return 2000;
+  int prio;
+  int anterior;
+
+  if(argint(0, &prio) < 0)
+    return -1;
+  
+  anterior = myproc()->priority;
+  myproc()->priority = prio;
+  return anterior;
+}
+
+int sys_getusage(void){
+  int pid;
+
+  if(argint(0, &pid) < 0)
+    return -1;
+  return getUsage(pid);
 }
 
 int

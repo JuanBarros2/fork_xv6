@@ -496,6 +496,23 @@ kill(int pid)
   return -1;
 }
 
+// Given a pid, returns the process usage who was that id.
+int
+getUsage(int pid)
+{
+  struct proc *p;
+
+  acquire(&ptable.lock);
+  for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
+    if(p->pid == pid){
+      release(&ptable.lock);
+      return p->usage;
+    }
+  }
+  release(&ptable.lock);
+  return -1;
+}
+
 //PAGEBREAK: 36
 // Print a process listing to console.  For debugging.
 // Runs when user types ^P on console.
