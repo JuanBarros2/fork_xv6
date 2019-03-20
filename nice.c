@@ -6,5 +6,6 @@ int
 main(int argc, char **argv)
 {
   getpriority();
+  setpriority(7);
   exit();
 }

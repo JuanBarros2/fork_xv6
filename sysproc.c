@@ -43,6 +43,11 @@ sys_getpriority(void)
   return 1000;
 }
 
+int sys_setpriority(void){
+  cprintf("F");
+  return 2000;
+}
+
 int
 sys_getpid(void)
 {
