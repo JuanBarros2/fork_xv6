@@ -109,6 +109,8 @@ int             fork(void);
 int             growproc(int);
 int             kill(int);
 int             getUsage(int);
+int             getPriority(int);
+int             setPriority(int, int);
 void            getAllPids(void);
 struct cpu*     mycpu(void);
 struct proc*    myproc();

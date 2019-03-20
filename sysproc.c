@@ -39,19 +39,22 @@ sys_kill(void)
 int
 sys_getpriority(void)
 {
-  return myproc()->priority;
+  int pid;
+  if(argint(0, &pid) < 0)
+    return -1;
+  return getPriority(pid);
 }
 
 int sys_setpriority(void){
+  int pid;
   int prio;
-  int anterior;
 
-  if(argint(0, &prio) < 0)
+  if(argint(0, &pid) < 0)
     return -1;
-  
-  anterior = myproc()->priority;
-  myproc()->priority = prio;
-  return anterior;
+  if(argint(1, &prio) < 0 && argint(1, &prio) > 31)
+    return -1;
+
+  return setPriority(pid, prio);
 }
 
 int sys_getusage(void){

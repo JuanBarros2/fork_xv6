@@ -5,15 +5,8 @@
 int
 main(int argc, char **argv)
 {
-  getusage(1);
-  getpriority();
-  setpriority(atoi(argv[1]));
-  getpriority();
-  setpriority(atoi(argv[2]));
-  getpriority();
-  setpriority(atoi(argv[3]));
-  getpriority();
-
-  getusage(1);
+  setpriority(atoi(argv[1]), atoi(argv[2]));
+  getpriority(atoi(argv[1]));
+  getusage(atoi(argv[1]));
   exit();
 }

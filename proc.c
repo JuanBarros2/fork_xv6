@@ -514,6 +514,42 @@ getUsage(int pid)
   return -1;
 }
 
+// Given a pid, returns the process usage who was that id.
+int
+getPriority(int pid)
+{
+  struct proc *p;
+
+  acquire(&ptable.lock);
+  for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
+    if(p->pid == pid){
+      release(&ptable.lock);
+      return p->priority;
+    }
+  }
+  release(&ptable.lock);
+  return -1;
+}
+
+// Given a pid, returns the process usage who was that id.
+int
+setPriority(int pid, int priority)
+{
+  struct proc *p;
+
+  acquire(&ptable.lock);
+  for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
+    if(p->pid == pid){
+      int ant = p->priority;
+      p->priority = priority;
+      release(&ptable.lock);
+      return ant;
+    }
+  }
+  release(&ptable.lock);
+  return -1;
+}
+
 // Return all pids.
 void
 getAllPids(void)
