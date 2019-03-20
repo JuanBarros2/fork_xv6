@@ -341,6 +341,7 @@ scheduler(void)
       // before jumping back to us.
       c->proc = p;
       switchuvm(p);
+      p->usage++;
       p->state = RUNNING;
 
       swtch(&(c->scheduler), p->context);

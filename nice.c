@@ -7,13 +7,12 @@ main(int argc, char **argv)
 {
   getusage(1);
   getpriority();
-  setpriority(7);
-
+  setpriority(atoi(argv[1]));
   getpriority();
-  setpriority(1);
-
+  setpriority(atoi(argv[2]));
   getpriority();
-  setpriority(2);
+  setpriority(atoi(argv[3]));
+  getpriority();
 
   getusage(1);
   exit();
