@@ -112,6 +112,7 @@ int             getUsage(int);
 int             getPriority(int);
 int             setPriority(int, int);
 void            getAllPids(void);
+void            killRandom(void);
 struct cpu*     mycpu(void);
 struct proc*    myproc();
 void            pinit(void);

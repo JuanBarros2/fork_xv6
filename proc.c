@@ -550,15 +550,26 @@ setPriority(int pid, int priority)
   return -1;
 }
 
+void
+killRandom(void)
+{
+  struct proc *p;
+
+  acquire(&ptable.lock);
+  p = ptable.proc + 1;
+  release(&ptable.lock);
+  kill(p->pid);
+}
+
 // Return all pids.
 void
 getAllPids(void)
 {
   struct proc *p;
-  cprintf("name\t pid\n");
+  cprintf("name\tpid\tusage\tpriority\n");
   acquire(&ptable.lock);
   for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
-    if (p->pid) cprintf("%s\t %d\n", p->name, p->pid);
+    if (p->pid) cprintf("%s\t%d\t%d\t%d\n", p->name, p->pid, p->usage, p->priority);
   }
   release(&ptable.lock);
 }
