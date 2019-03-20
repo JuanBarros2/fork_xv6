@@ -514,6 +514,19 @@ getUsage(int pid)
   return -1;
 }
 
+// Return all pids.
+void
+getAllPids(void)
+{
+  struct proc *p;
+  cprintf("name\t pid\n");
+  acquire(&ptable.lock);
+  for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
+    if (p->pid) cprintf("%s\t %d\n", p->name, p->pid);
+  }
+  release(&ptable.lock);
+}
+
 //PAGEBREAK: 36
 // Print a process listing to console.  For debugging.
 // Runs when user types ^P on console.

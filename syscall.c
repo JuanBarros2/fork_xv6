@@ -103,10 +103,10 @@ extern int sys_unlink(void);
 extern int sys_wait(void);
 extern int sys_write(void);
 extern int sys_uptime(void);
-//TODO PERGUNTAR PARA Q SERVE
 extern int sys_getpriority(void);
 extern int sys_setpriority(void);
 extern int sys_getusage(void);
+extern int sys_getallpids(void);
 
 static int (*syscalls[])(void) = {
 [SYS_fork]    sys_fork,
@@ -133,6 +133,7 @@ static int (*syscalls[])(void) = {
 [SYS_getpriority] sys_getpriority,
 [SYS_setpriority] sys_setpriority,
 [SYS_getusage] sys_getusage,
+[SYS_getallpids] sys_getallpids,
 };
 
 void
@@ -141,7 +142,7 @@ syscall(void)
   int num;
   struct proc *curproc = myproc();
 
-  char syscalls_names[24][21] = {
+  char syscalls_names[25][21] = {
     "fork",
     "exit",
     "wait",
@@ -165,7 +166,8 @@ syscall(void)
     "close",
     "getpriority",
     "setpriority",
-    "getusage"
+    "getusage",
+    "getallpids",
   };
 
   num = curproc->tf->eax;
