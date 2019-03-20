@@ -62,6 +62,12 @@ int sys_getusage(void){
   return getUsage(pid);
 }
 
+int sys_getallpids(void){
+  getAllPids();
+  return 1;
+}
+
+
 int
 sys_getpid(void)
 {

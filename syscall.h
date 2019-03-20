@@ -23,4 +23,5 @@
 #define SYS_getpriority 22
 #define SYS_setpriority 23
 #define SYS_getusage 24
+#define SYS_getallpids 25
 
