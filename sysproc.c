@@ -49,9 +49,12 @@ int sys_setpriority(void){
   int pid;
   int prio;
 
-  if(argint(0, &pid) < 0)
+  argint(0, &pid);
+  argint(1, &prio);
+
+  if(pid < 0)
     return -1;
-  if(argint(1, &prio) < 0 || argint(1, &prio) > 31)
+  if(prio < 0 || prio > 31)
     return -1;
 
   return setPriority(pid, prio);

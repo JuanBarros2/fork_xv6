@@ -52,7 +52,7 @@ trap(struct trapframe *tf)
       acquire(&tickslock);
       ticks++;
       if(ticks % 500 == 0){
-        killRandom();
+        //killRandom();
       }
       wakeup(&ticks);
       release(&tickslock);
