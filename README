@@ -48,3 +48,12 @@ will need to install a cross-compiler gcc suite capable of producing
 x86 ELF binaries (see https://pdos.csail.mit.edu/6.828/).
 Then run "make TOOLPREFIX=i386-jos-elf-". Now install the QEMU PC
 simulator and run "make qemu".
+
+## Lab 3 
+
+Implementar um escalonador com filas de prioridade. Ao chamar o escalonador
+será executado o primeiro elemento da fila de maior prioridade. Ao finalizar,
+os processos das cabeças das filas inferiores serão atualizadas para a fila
+de maior prioridade seguinte a fila atual e o processo que foi executado
+voltará para o final da fila com base na prioridade guardada no processo.
+
