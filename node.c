@@ -7,6 +7,12 @@ typedef struct node {
     struct node* next;
 } Node;
 
+// Function to check is list is empty
+int isEmpty(Node** head)
+{
+    return head == NULL || (*head) == NULL;
+}
+
 // Function to Create A New Node
 Node* newNode(int d, int p)
 {
@@ -22,11 +28,12 @@ Node* newNode(int d, int p)
 // highest priority form the list
 void pop(Node** head)
 {
-    Node* temp = *head;
-    (*head) = (*head)->next;
-    free(temp);
+    if(!isEmpty(head)){
+        Node* temp = *head;
+        (*head) = (*head)->next;
+        free(temp);
+    }
 }
-
 
 // Function to push according to priority
 void push(Node** head, int d, int p){
@@ -40,10 +47,4 @@ void push(Node** head, int d, int p){
     } else {
         push(&((*head)->next), d+1, p);
     }
-}
-
-// Function to check is list is empty
-int isEmpty(Node** head)
-{
-    return head == NULL || (*head) == NULL;
 }
