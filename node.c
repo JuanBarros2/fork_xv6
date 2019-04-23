@@ -1,8 +1,9 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <proc.h>
 
 typedef struct node {
-    int data;
+    struct proc* data;
     int priority;
     struct node* next;
 } Node;
@@ -14,7 +15,7 @@ int isEmpty(Node** head)
 }
 
 // Function to Create A New Node
-Node* newNode(int d, int p)
+Node* newNode(struct proc* d, int p)
 {
     Node* temp = (Node*)malloc(sizeof(Node));
     temp->data = d;
@@ -26,17 +27,20 @@ Node* newNode(int d, int p)
 
 // Removes the element with the
 // highest priority form the list
-void pop(Node** head)
+struct proc* pop(Node** head)
 {
+    struct proc* result = NULL;
     if(!isEmpty(head)){
         Node* temp = *head;
+        result = temp->data;
         (*head) = (*head)->next;
         free(temp);
     }
+    return result;
 }
 
 // Function to push according to priority
-void push(Node** head, int d, int p){
+void push(Node** head, struct proc* d, int p){
     if((*head) == NULL){
         Node* temp = newNode(d, p);
         (*head) = temp;
