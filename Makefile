@@ -182,6 +182,7 @@ UPROGS=\
 	_wc\
 	_zombie\
 	_nice\
+	_testPriority\
 	_ps\
 
 fs.img: mkfs README $(UPROGS)
@@ -253,6 +254,7 @@ EXTRA=\
 	mkfs.c ulib.c user.h cat.c echo.c forktest.c grep.c kill.c\
 	ln.c ls.c mkdir.c rm.c stressfs.c usertests.c wc.c zombie.c\
 	nice.c\
+	testPriority.c\
 	ps.c\
 	printf.c umalloc.c\
 	README dot-bochsrc *.pl toc.* runoff runoff1 runoff.list\
