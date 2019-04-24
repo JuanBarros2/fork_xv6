@@ -336,12 +336,18 @@ scheduler(void)
       if(p->state != RUNNABLE)
         continue;
 
+      if (p->auxPriority != 0) {
+        p->auxPriority--;
+        continue;
+      }
+
       // Switch to chosen process.  It is the process's job
       // to release ptable.lock and then reacquire it
       // before jumping back to us.
       c->proc = p;
       switchuvm(p);
       p->usage++;
+      p->auxPriority = p->priority;
       p->state = RUNNING;
 
       swtch(&(c->scheduler), p->context);
@@ -542,6 +548,7 @@ setPriority(int pid, int priority)
     if(p->pid == pid){
       int ant = p->priority;
       p->priority = priority;
+      p->auxPriority = priority;
       release(&ptable.lock);
       return ant;
     }
