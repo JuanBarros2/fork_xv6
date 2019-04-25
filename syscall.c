@@ -142,38 +142,38 @@ syscall(void)
   int num;
   struct proc *curproc = myproc();
 
-  char syscalls_names[25][21] = {
-    "fork",
-    "exit",
-    "wait",
-    "pipe",
-    "read",
-    "kill",
-    "exec",
-    "fstat",
-    "chdir",
-    "dup",
-    "getpid",
-    "sbrk",
-    "sleep",
-    "uptime",
-    "open",
-    "write",
-    "mknod",
-    "unlink",
-    "link",
-    "mkdir",
-    "close",
-    "getpriority",
-    "setpriority",
-    "getusage",
-    "getallpids",
-  };
+  // char syscalls_names[25][21] = {
+  //   "fork",
+  //   "exit",
+  //   "wait",
+  //   "pipe",
+  //   "read",
+  //   "kill",
+  //   "exec",
+  //   "fstat",
+  //   "chdir",
+  //   "dup",
+  //   "getpid",
+  //   "sbrk",
+  //   "sleep",
+  //   "uptime",
+  //   "open",
+  //   "write",
+  //   "mknod",
+  //   "unlink",
+  //   "link",
+  //   "mkdir",
+  //   "close",
+  //   "getpriority",
+  //   "setpriority",
+  //   "getusage",
+  //   "getallpids",
+  // };
 
   num = curproc->tf->eax;
   if(num > 0 && num < NELEM(syscalls) && syscalls[num]) {
     curproc->tf->eax = syscalls[num]();
-    cprintf("%s: known sys call! %d\n", syscalls_names[num-1], curproc->tf->eax);
+    //cprintf("%s: known sys call! %d\n", syscalls_names[num-1], curproc->tf->eax);
   } else {
     cprintf("%d %s: unknown sys call %d\n",
             curproc->pid, curproc->name, num);

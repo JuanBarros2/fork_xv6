@@ -51,9 +51,6 @@ trap(struct trapframe *tf)
     if(cpuid() == 0){
       acquire(&tickslock);
       ticks++;
-      if(ticks % 500 == 0){
-        killRandom();
-      }
       wakeup(&ticks);
       release(&tickslock);
     }
